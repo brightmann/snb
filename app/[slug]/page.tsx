@@ -1,6 +1,10 @@
 import Link from "next/link"
 import { ArrowLeftIcon } from "@heroicons/react/24/solid"
-import { getArticleData } from "@/lib/articles"
+import { getArticleData, getSortedArticles } from "@/lib/articles"
+
+export async function generateStaticParams() {
+  return getSortedArticles().map((article) => ({ slug: article.id }))
+}
 
 const Article = async ({ params }: { params: { slug: string } }) => {
   const articleData = await getArticleData(params.slug)
