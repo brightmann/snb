@@ -63,7 +63,7 @@ export const getArticleData = async (
 
   const matterResult = matter(fileContents)
 
-  const processedContent = await remark().use(html).process(matterResult.content)
+  const processedContent = await remark().use(html, { sanitize: false }).process(matterResult.content)
   const contentHtml = processedContent.toString()
 
   return {
